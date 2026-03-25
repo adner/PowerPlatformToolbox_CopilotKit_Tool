@@ -1,8 +1,8 @@
 {
     "name": "pptb-react-sample-tool",
     "version": "0.2.15",
-    "displayName": "React Sample Tool",
-    "description": "A sample Power Platform Tool Box tool built with React",
+    "displayName": "PPTB AI Assistant",
+    "description": "An AI assistant for Power Platform Toolbox",
     "contributors": [
         {
             "name": "Power Platform Tool Box",
@@ -14,6 +14,18 @@
         "repository": "https://github.com/PowerPlatformToolBox/sample-tools",
         "website": "https://powerplatformtoolbox.com",
         "readmeUrl": "https://raw.githubusercontent.com/PowerPlatformToolBox/sample-tools/refs/heads/main/new/react-sample/README.md"
+    },
+    "cspExceptions": {
+        "connect-src": [
+            {
+                "domain": "https://api.cloud.copilotkit.ai",
+                "exceptionReason": "Connects to [CopilotKit Cloud](https://cloud.copilotkit.ai) to proxy LLM requests for the AI chat agent."
+            },
+            {
+                "domain": "https://wttr.in",
+                "exceptionReason": "Fetches weather data from [wttr.in](https://wttr.in) for the get_weather tool."
+            }
+        ]
     },
     "main": "index.html",
     "repository": {
@@ -31,8 +43,11 @@
         "watch": "vite build --watch"
     },
     "dependencies": {
+        "@copilotkit/react-core": "^1.54.0",
+        "@copilotkit/react-ui": "^1.54.0",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react-dom": "^18.3.1",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@pptb/types": "^1.0.17",
