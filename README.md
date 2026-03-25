@@ -46,8 +46,3 @@ The build outputs a single IIFE bundle — no ES modules, no code splitting. Thi
 2. In Power Platform Tool Box, go to Tools → Install Tool
 3. Point it at the `dist/` directory
 
-The `toolboxAPI` and `dataverseAPI` globals are injected by PPTB at runtime. They don't exist in standalone dev mode.
-
-## License
-
-GPL-3.0
