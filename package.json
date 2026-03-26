@@ -22,6 +22,10 @@
                 "exceptionReason": "Connects to [CopilotKit Cloud](https://cloud.copilotkit.ai) to proxy LLM requests for the AI chat agent."
             },
             {
+                "domain": "https://api.openai.com",
+                "exceptionReason": "Connects directly to the [OpenAI API](https://platform.openai.com) for browser-side LLM requests when using the OpenAI direct agent."
+            },
+            {
                 "domain": "https://wttr.in",
                 "exceptionReason": "Fetches weather data from [wttr.in](https://wttr.in) for the get_weather tool."
             }
