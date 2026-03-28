@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { CopilotChat, useAgentContext } from "@copilotkit/react-core/v2";
 import dataverseLogo from "./assets/dataverse-logo.png";
 import { usePlatformTools } from "./hooks/useFrontendTools";
 import { useToolRenderers } from "./hooks/useToolRenderers";
 import { usePlatformContext } from "./hooks/usePlatformContext";
+import { SettingsPanel, SettingsButton } from "./components/SettingsPanel";
+import type { AgentSettings } from "./hooks/useAgentSettings";
 
 const SYSTEM_INSTRUCTIONS = `You are a Power Platform assistant running inside the Power Platform Tool Box (PPTB) desktop application. You have full access to the connected Microsoft Dataverse environment through the platform APIs.
 
@@ -29,10 +32,11 @@ Guidelines:
 - Use get_entity_metadata and get_entity_related_metadata to discover table schemas before querying unknown entities.
 - Use get_entity_set_name to resolve OData collection names from logical entity names.`;
 
-function App() {
+function App({ settings }: { settings: AgentSettings }) {
     usePlatformTools();
     useToolRenderers();
     const { connection } = usePlatformContext();
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
     useAgentContext({
         description: "System instructions for the Power Platform assistant",
@@ -49,9 +53,12 @@ function App() {
                         <span className="header-subtitle">AI-powered Dataverse companion</span>
                     </div>
                 </div>
-                <div className="connection-badge" data-status={connection ? "connected" : "disconnected"}>
-                    <span className="status-dot" />
-                    {connection ? connection.name : "Not connected"}
+                <div className="header-right">
+                    <div className="connection-badge" data-status={connection ? "connected" : "disconnected"}>
+                        <span className="status-dot" />
+                        {connection ? connection.name : "Not connected"}
+                    </div>
+                    <SettingsButton onClick={() => setSettingsOpen(true)} />
                 </div>
             </header>
             <div className="chat-container">
@@ -62,6 +69,11 @@ function App() {
                     }}
                 />
             </div>
+            <SettingsPanel
+                open={settingsOpen}
+                onClose={() => setSettingsOpen(false)}
+                settings={settings}
+            />
         </div>
     );
 }
